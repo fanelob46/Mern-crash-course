@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { CiSquarePlus } from "react-icons/ci";
 
+
 const NavBar = () => {
   const [isDarkMode, setIsDarkMode] = useState(false);
+  
 
   useEffect(() => {
     if (isDarkMode) {
@@ -18,7 +20,7 @@ const NavBar = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-gray-100 transition-colors duration-300">
+    <div className="">
       <div className="max-w-[1140px] px-4 mx-auto">
         <div className="flex justify-between h-16 items-center">
           <div>
@@ -31,12 +33,12 @@ const NavBar = () => {
           <div className="flex items-center space-x-4">
             <Link to={"/create"}>
               <button>
-                <CiSquarePlus className="text-4xl" />
+                <CiSquarePlus className="text-4xl dark:text-white" />
               </button>
             </Link>
             <button
               onClick={toggleTheme}
-              className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-colors duration-300"
+              className="p-2 rounded-full bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 transition-colors duration-300"
             >
               {isDarkMode ? "🌙 Dark Mode" : "☀️ Light Mode"}
             </button>
