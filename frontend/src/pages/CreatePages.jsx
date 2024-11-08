@@ -21,9 +21,9 @@ const handleAddProduct = async() =>{
 
   return (
     <div className="text-black dark:text-white">
-      <div>
+      <div className="grid place-items-center">
         <h1 className="text-2xl text-center mb-8">Create New Product</h1>
-        <div className="w-full rounded-lg shadow-md p-6 grid place-items-center">
+        <div className="rounded-lg shadow-md p-6 grid place-items-center dark:text-white dark:bg-[#1c2434] w-[700px] space-y-5">
           <input
             type="text"
             placeholder="Product name"
@@ -32,6 +32,7 @@ const handleAddProduct = async() =>{
             onChange={(e) =>
               setNewProduct({ ...newProduct, name: e.target.value })
             }
+            className="dark:bg-gray-400"
           />
 
           <input
@@ -42,6 +43,7 @@ const handleAddProduct = async() =>{
             onChange={(e) =>
               setNewProduct({ ...newProduct, price: e.target.value })
             }
+            className="dark:bg-gray-400"
           />
 
           <input
@@ -51,9 +53,12 @@ const handleAddProduct = async() =>{
             onChange={(e) =>
               setNewProduct({ ...newProduct, image: e.target.value })
             }
+            className="dark:bg-gray-400"
           />
 
-          <button onClick={handleAddProduct}>Add Product</button>
+          <button onClick={handleAddProduct}
+          className="bg-slate-400 rounded-lg px-3"
+          >Add Product</button>
         </div>
       </div>
     </div>
