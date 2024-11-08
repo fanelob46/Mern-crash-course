@@ -1,26 +1,35 @@
 import React, { useState } from "react";
 import { useProductStore } from "../store/product";
+import { useNavigate } from "react-router-dom";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const CreatePages = () => {
+  const navigate = useNavigate();
 
-const [newProduct, setNewProduct] = useState({
-  name:"",
-  price:"",
-  image:""
-})
+  const [newProduct, setNewProduct] = useState({
+    name: "",
+    price: "",
+    image: "",
+  });
 
-const {createProduct} = useProductStore()
+  const { createProduct } = useProductStore();
 
-const handleAddProduct = async() =>{
-  const {success,message} = await createProduct(newProduct);
+  const handleAddProduct = async () => {
+    const { success, message } = await createProduct(newProduct);
 
-  setNewProduct({name:"", price:"", image:""});
-  console.log("Success:", success);
-  console.log("Message:", message);
-}
+    if (success) {
+      setNewProduct({ name: "", price: "", image: "" });
+      toast.success("Product added successfully!");
+      navigate("/");
+    } else {
+      toast.error("Failed to add product: " + message);
+    }
+  };
 
   return (
     <div className="text-black dark:text-white">
+      <ToastContainer position="top-right" autoClose={3000} />
       <div className="grid place-items-center">
         <h1 className="text-2xl text-center mb-8">Create New Product</h1>
         <div className="rounded-lg shadow-md p-6 grid place-items-center dark:text-white dark:bg-[#1c2434] w-[700px] space-y-5">
@@ -32,7 +41,7 @@ const handleAddProduct = async() =>{
             onChange={(e) =>
               setNewProduct({ ...newProduct, name: e.target.value })
             }
-            className="dark:bg-gray-400"
+            className="dark:bg-gray-400 p-2 rounded w-full"
           />
 
           <input
@@ -43,22 +52,26 @@ const handleAddProduct = async() =>{
             onChange={(e) =>
               setNewProduct({ ...newProduct, price: e.target.value })
             }
-            className="dark:bg-gray-400"
+            className="dark:bg-gray-400 p-2 rounded w-full"
           />
 
           <input
+            type="text"
             placeholder="Image URL"
             name="image"
             value={newProduct.image}
             onChange={(e) =>
               setNewProduct({ ...newProduct, image: e.target.value })
             }
-            className="dark:bg-gray-400"
+            className="dark:bg-gray-400 p-2 rounded w-full"
           />
 
-          <button onClick={handleAddProduct}
-          className="bg-slate-400 rounded-lg px-3"
-          >Add Product</button>
+          <button
+            onClick={handleAddProduct}
+            className="bg-slate-400 rounded-lg px-3 py-2 text-white"
+          >
+            Add Product
+          </button>
         </div>
       </div>
     </div>
